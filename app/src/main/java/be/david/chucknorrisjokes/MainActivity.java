@@ -1,5 +1,6 @@
 package be.david.chucknorrisjokes;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,8 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
         appPreferences = new AppPreferences(this);
 
-        if (appPreferences.isFirstTime()) {
+        if (!appPreferences.isFirstTime()) {
 
+            nextActivity();
 
         }
     }
@@ -30,7 +32,19 @@ public class MainActivity extends AppCompatActivity {
 
         appPreferences.setUsername(username.getText().toString().trim());
 
+        nextActivity();
 
+    }
+
+    public void nextActivity() {
+
+        Intent intent = new Intent(this, JokeActivity.class);
+
+        intent.setFlags(intent.FLAG_ACTIVITY_NO_ANIMATION);
+
+        startActivity(intent);
+
+        finish();
 
     }
 }
